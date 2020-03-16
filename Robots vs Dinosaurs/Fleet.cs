@@ -19,7 +19,7 @@ namespace Robots_vs_Dinosaurs
         
         public Fleet()
         {
-            alpha = new Robots("Cherno Alpha", 500, 500);            
+            alpha = new Robots("Cherno Alpha", 500, 50);            
             gipsy = new Robots("Gipsy Danger", 300, 500);
             typhoon = new Robots("Crimson Typhoon", 200, 500);
 

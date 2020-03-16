@@ -7,9 +7,9 @@
         public Dinosaur ankyl;
         public Herd()
         {
-            spino = new Dinosaur("Spinosaurus", 300, 500);
-            quetzal = new Dinosaur("Quetzalcoatlus", 200, 500);
-            ankyl = new Dinosaur("Ankylosaurus", 500, 500);
+            spino = new Dinosaur("Spinosaurus", 300, 500, 50);
+            quetzal = new Dinosaur("Quetzalcoatlus", 200, 500, 50);
+            ankyl = new Dinosaur("Ankylosaurus", 500, 500, 50);
         }
     }       
 }         

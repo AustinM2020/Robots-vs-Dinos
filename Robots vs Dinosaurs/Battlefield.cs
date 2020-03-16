@@ -19,7 +19,7 @@ namespace Robots_vs_Dinosaurs
         {
             random = new Random();
 
-            int num = random.Next(1, 11);
+            int num = random.Next(0, 11);
             {
                 Console.WriteLine("ROBOTS VS DINOSAURS\nPRESS ENTER TO BEGIN");
                 Console.ReadLine();
@@ -39,28 +39,42 @@ namespace Robots_vs_Dinosaurs
         }
         public void GameContinuedDinos()
         {
-            while (((fleet.alpha.energy > 0) || (fleet.gipsy.energy > 0) || (fleet.typhoon.energy > 0)) && ((herd.spino.health > 0) || (herd.ankyl.health > 0) || (herd.quetzal.health > 0)))
+            while ((fleet.alpha.health + fleet.gipsy.health + fleet.typhoon.health) > 0  && (herd.spino.health + herd.ankyl.health + herd.quetzal.health) > 0)
             {
                 MenuDino();
                 MenuRobot();
             }
-            if
+            if ((fleet.alpha.health > 0) && (fleet.gipsy.health > 0) && (fleet.typhoon.health > 0))
+            {
+                Console.WriteLine("ROBOTS WIN");
+            }
+            else if ((herd.spino.health > 0) && (herd.ankyl.health > 0) && (herd.quetzal.health > 0))
+            {
+                Console.WriteLine("DINOSAURS WIN");
+            }
         }
         public void GameContinuedRobots()
         {
-            while (((fleet.alpha.energy > 0) || (fleet.gipsy.energy > 0) || (fleet.typhoon.energy > 0)) && ((herd.spino.health > 0) || (herd.ankyl.health > 0) || (herd.quetzal.health > 0)))
+            while (((fleet.alpha.health > 0) || (fleet.gipsy.health > 0) || (fleet.typhoon.health > 0)) && ((herd.spino.health > 0) || (herd.ankyl.health > 0) || (herd.quetzal.health > 0)))
             {
                 MenuRobot();
                 MenuDino();
             }
-
+            if ((fleet.alpha.health > 0) && (fleet.gipsy.health > 0) && (fleet.typhoon.health > 0))
+            {
+                Console.WriteLine("ROBOTS WIN");
+            }
+            else if ((herd.spino.health > 0) && (herd.ankyl.health > 0) && (herd.quetzal.health > 0))
+            {
+                Console.WriteLine("Dinosaurs Win");
+            }
         }
         public int MenuRobot()
         {
             Console.WriteLine("SELECT A ROBOT TO USE!");
-            Console.WriteLine("1)" + fleet.alpha.name + " Health:" + fleet.alpha.energy + " Energy Level:" + fleet.alpha.powerLevel + " Weapon 1:" + fleet.missiles.weaponType + " | Attack Power:" + fleet.missiles.attackPower + " Weapon 2:" + fleet.punch.weaponType + " | Attack Power:" + fleet.punch.attackPower);
-            Console.WriteLine("2)" + fleet.gipsy.name + " Health:" + fleet.gipsy.energy + " Energy Level:" + fleet.gipsy.powerLevel + " Weapon 1:" + fleet.plasma.weaponType + " | Attack Power:" + fleet.plasma.attackPower + " Weapon 2:" + fleet.sword.weaponType + " | Attack Power:" + fleet.sword.attackPower);
-            Console.WriteLine("2)" + fleet.typhoon.name + " Health:" + fleet.typhoon.energy + " Energy Level:" + fleet.typhoon.powerLevel + " Weapon 1:" + fleet.saw.weaponType + " | Attack Power:" + fleet.saw.attackPower + " Weapon 2:" + fleet.kick.weaponType + " | Attack Power:" + fleet.kick.attackPower);
+            Console.WriteLine("1)" + fleet.alpha.name + " Health:" + fleet.alpha.health + " Energy Level:" + fleet.alpha.energy);
+            Console.WriteLine("2)" + fleet.gipsy.name + " Health:" + fleet.gipsy.health + " Energy Level:" + fleet.gipsy.energy);
+            Console.WriteLine("3)" + fleet.typhoon.name + " Health:" + fleet.typhoon.health + " Energy Level:" + fleet.typhoon.energy);
             int choice;
             do
             {
@@ -68,21 +82,21 @@ namespace Robots_vs_Dinosaurs
                 switch (choice)
                 {
                     case 1:
-                        if (fleet.alpha.energy > 0)
+                        if (fleet.alpha.health > 0)
                         {
                             return AlphaWeaponChoice();
                         }
                         Console.WriteLine("THAT ROBOT IS DEAD MAKE ANOTHER SELECTION");
                         break;
                     case 2:
-                        if (fleet.gipsy.energy > 0)
+                        if (fleet.gipsy.health > 0)
                         {
                             return GipsyWeaponChoice();
                         }
                         Console.WriteLine("THAT ROBOT IS DEAD MAKE ANOTHER SELECTION");
                         break;
                     case 3:
-                        if (fleet.typhoon.energy > 0)
+                        if (fleet.typhoon.health > 0)
                         {
                             return TyphoonWeaponChoice();
                         }
@@ -90,7 +104,7 @@ namespace Robots_vs_Dinosaurs
                         break;
                 }
             }
-            while (fleet.alpha.energy > 0 || fleet.gipsy.energy > 0 || fleet.typhoon.energy > 0);
+            while (fleet.alpha.health > 0 || fleet.gipsy.health > 0 || fleet.typhoon.health > 0);
             return 0;
         }
         public int MenuDino()
@@ -135,40 +149,40 @@ namespace Robots_vs_Dinosaurs
         public int SpinoAttack()
         {
             Console.WriteLine("SELECT  ROBOT TO ATTACK!");
-            Console.WriteLine("1)" + fleet.alpha.name + " Health:" + fleet.alpha.energy);
-            Console.WriteLine("2)" + fleet.gipsy.name + " Health:" + fleet.gipsy.energy);
-            Console.WriteLine("3)" + fleet.typhoon.name + " Health:" + fleet.typhoon.energy);
+            Console.WriteLine("1)" + fleet.alpha.name + " Health:" + fleet.alpha.health);
+            Console.WriteLine("2)" + fleet.gipsy.name + " Health:" + fleet.gipsy.health);
+            Console.WriteLine("3)" + fleet.typhoon.name + " Health:" + fleet.typhoon.health);
 
             int choice = Convert.ToInt32(Console.ReadLine());
 
             switch (choice)
             {
                 case 1:
-                    fleet.alpha.energy = fleet.alpha.energy - herd.spino.attackPower;
-                    Console.WriteLine("CHERNO ALPHAS HEALTH IS NOW:" + fleet.alpha.energy);
-                    if (fleet.alpha.energy <= 0)
+                    fleet.alpha.health = fleet.alpha.health - herd.spino.attackPower;
+                    Console.WriteLine("CHERNO ALPHAS HEALTH IS NOW:" + fleet.alpha.health);
+                    if (fleet.alpha.health <= 0)
                     {
                         Console.WriteLine("CHERNO ALPHA HAS DIED!");
                     }
-                    return fleet.alpha.energy;
+                    return fleet.alpha.health;
                     break;
                 case 2:
-                    fleet.gipsy.energy = fleet.gipsy.energy - herd.spino.attackPower;
-                    Console.WriteLine("GIPSY DANGERS HEALTH IS NOW:" + fleet.gipsy.energy);
-                    if (fleet.gipsy.energy <= 0)
+                    fleet.gipsy.health = fleet.gipsy.health - herd.spino.attackPower;
+                    Console.WriteLine("GIPSY DANGERS HEALTH IS NOW:" + fleet.gipsy.health);
+                    if (fleet.gipsy.health <= 0)
                     {
                         Console.WriteLine("GIPSY DANGER HAS DIED!");
                     }
-                    return fleet.gipsy.energy;
+                    return fleet.gipsy.health;
                     break;
                 case 3:
-                    fleet.typhoon.energy = fleet.typhoon.energy - herd.spino.attackPower;
-                    Console.WriteLine("CRIMSON TYPHOONS HEALTH IS NOW:" + fleet.typhoon.energy);
-                    if (fleet.typhoon.energy <= 0)
+                    fleet.typhoon.health = fleet.typhoon.health - herd.spino.attackPower;
+                    Console.WriteLine("CRIMSON TYPHOONS HEALTH IS NOW:" + fleet.typhoon.health);
+                    if (fleet.typhoon.health <= 0)
                     {
                         Console.WriteLine("CRIMSON TYPHOON HAS DIED!");
                     }
-                    return fleet.typhoon.energy;
+                    return fleet.typhoon.health;
                     break;
             }
             return 0;
@@ -176,40 +190,40 @@ namespace Robots_vs_Dinosaurs
         public int AnkylAttack()
         {
             Console.WriteLine("SELECT  ROBOT TO ATTACK!");
-            Console.WriteLine("1)" + fleet.alpha.name + " Health:" + fleet.alpha.energy);
-            Console.WriteLine("2)" + fleet.gipsy.name + " Health:" + fleet.gipsy.energy);
-            Console.WriteLine("3)" + fleet.typhoon.name + " Health:" + fleet.typhoon.energy);
+            Console.WriteLine("1)" + fleet.alpha.name + " Health:" + fleet.alpha.health);
+            Console.WriteLine("2)" + fleet.gipsy.name + " Health:" + fleet.gipsy.health);
+            Console.WriteLine("3)" + fleet.typhoon.name + " Health:" + fleet.typhoon.health);
 
             int choice = Convert.ToInt32(Console.ReadLine());
 
             switch (choice)
             {
                 case 1:
-                    fleet.alpha.energy = fleet.alpha.energy - herd.ankyl.attackPower;
-                    Console.WriteLine("CHERNO ALPHAS HEALTH IS NOW:" + fleet.alpha.energy);
-                    if (fleet.alpha.energy <= 0)
+                    fleet.alpha.health = fleet.alpha.health - herd.ankyl.attackPower;
+                    Console.WriteLine("CHERNO ALPHAS HEALTH IS NOW:" + fleet.alpha.health);
+                    if (fleet.alpha.health <= 0)
                     {
                         Console.WriteLine("CHERNO ALPHA HAS DIED!");
                     }
-                    return fleet.alpha.energy;
+                    return fleet.alpha.health;
                     break;
                 case 2:
-                    fleet.gipsy.energy = fleet.gipsy.energy - herd.ankyl.attackPower;
-                    Console.WriteLine("GIPSY DANGERS HEALTH IS NOW:" + fleet.gipsy.energy);
-                    if (fleet.gipsy.energy <= 0)
+                    fleet.gipsy.health = fleet.gipsy.health - herd.ankyl.attackPower;
+                    Console.WriteLine("GIPSY DANGERS HEALTH IS NOW:" + fleet.gipsy.health);
+                    if (fleet.gipsy.health <= 0)
                     {
                         Console.WriteLine("GIPSY DANGER HAS DIED!");
                     }
-                    return fleet.gipsy.energy;
+                    return fleet.gipsy.health;
                     break;
                 case 3:
-                    fleet.typhoon.energy = fleet.typhoon.energy - herd.ankyl.attackPower;
-                    Console.WriteLine("CRIMSON TYPHOONS HEALTH IS NOW:" + fleet.typhoon.energy);
-                    if (fleet.typhoon.energy <= 0)
+                    fleet.typhoon.health = fleet.typhoon.health - herd.ankyl.attackPower;
+                    Console.WriteLine("CRIMSON TYPHOONS HEALTH IS NOW:" + fleet.typhoon.health);
+                    if (fleet.typhoon.health <= 0)
                     {
                         Console.WriteLine("CRIMSON TYPHOON HAS DIED!");
                     }
-                    return fleet.typhoon.energy;
+                    return fleet.typhoon.health;
                     break;
             }
 
@@ -218,40 +232,40 @@ namespace Robots_vs_Dinosaurs
         public int QuetzalAttack()
         {
             Console.WriteLine("SELECT  ROBOT TO ATTACK!");
-            Console.WriteLine("1)" + fleet.alpha.name + " Health:" + fleet.alpha.energy);
-            Console.WriteLine("2)" + fleet.gipsy.name + " Health:" + fleet.gipsy.energy);
-            Console.WriteLine("3)" + fleet.typhoon.name + " Health:" + fleet.typhoon.energy);
+            Console.WriteLine("1)" + fleet.alpha.name + " Health:" + fleet.alpha.health);
+            Console.WriteLine("2)" + fleet.gipsy.name + " Health:" + fleet.gipsy.health);
+            Console.WriteLine("3)" + fleet.typhoon.name + " Health:" + fleet.typhoon.health);
 
             int choice = Convert.ToInt32(Console.ReadLine());
 
             switch (choice)
             {
                 case 1:
-                    fleet.alpha.energy = fleet.alpha.energy - herd.quetzal.attackPower;
-                    Console.WriteLine("CHERNO ALPHAS HEALTH IS NOW:" + fleet.alpha.energy);
-                    if (fleet.alpha.energy <= 0)
+                    fleet.alpha.health = fleet.alpha.health - herd.quetzal.attackPower;
+                    Console.WriteLine("CHERNO ALPHAS HEALTH IS NOW:" + fleet.alpha.health);
+                    if (fleet.alpha.health <= 0)
                     {
                         Console.WriteLine("CHERNO ALPHA HAS DIED!");
                     }
-                    return fleet.alpha.energy;
+                    return fleet.alpha.health;
                     break;
                 case 2:
-                    fleet.gipsy.energy = fleet.gipsy.energy - herd.quetzal.attackPower;
-                    Console.WriteLine("GIPSY DANGERS HEALTH IS NOW:" + fleet.gipsy.energy);
-                    if (fleet.gipsy.energy <= 0)
+                    fleet.gipsy.health = fleet.gipsy.health - herd.quetzal.attackPower;
+                    Console.WriteLine("GIPSY DANGERS HEALTH IS NOW:" + fleet.gipsy.health);
+                    if (fleet.gipsy.health <= 0)
                     {
                         Console.WriteLine("GIPSY DANGER HAS DIED!");
                     }
-                    return fleet.gipsy.energy;
+                    return fleet.gipsy.health;
                     break;
                 case 3:
-                    fleet.typhoon.energy = fleet.typhoon.energy - herd.quetzal.attackPower;
-                    Console.WriteLine("CRIMSON TYPHOONS HEALTH IS NOW:" + fleet.typhoon.energy);
-                    if (fleet.typhoon.energy <= 0)
+                    fleet.typhoon.health = fleet.typhoon.health - herd.quetzal.attackPower;
+                    Console.WriteLine("CRIMSON TYPHOONS HEALTH IS NOW:" + fleet.typhoon.health);
+                    if (fleet.typhoon.health <= 0)
                     {
                         Console.WriteLine("CRIMSON TYPHOON HAS DIED!");
                     }
-                    return fleet.typhoon.energy;
+                    return fleet.typhoon.health;
                     break;
             }
 
@@ -261,20 +275,36 @@ namespace Robots_vs_Dinosaurs
         public int AlphaWeaponChoice()
         {
             Console.WriteLine("SELECT A WEAPON");
-            Console.WriteLine("1)Weapon 1:" + fleet.missiles.weaponType + " | Attack Power:" + fleet.missiles.attackPower + "\n2)Weapon 2:" + fleet.punch.weaponType + " | Attack Power:" + fleet.punch.attackPower);
+            Console.WriteLine("1)Weapon 1:" + fleet.missiles.weaponType + " | Attack Power:" + fleet.missiles.attackPower + " | Energy usage:" + fleet.missiles.energyUsage + "\n2)Weapon 2:" + fleet.punch.weaponType + " | Attack Power:" + fleet.punch.attackPower + " | Energy usage:" + fleet.punch.energyUsage);
 
-            int choice = Convert.ToInt32(Console.ReadLine());
-            switch (choice)
+            int choice; 
+            do
             {
-                case 1:
-                    return MissleAttack();
-                    break;
-                case 2:
-                    return PunchAttack();
-                    break;
+                choice = Convert.ToInt32(Console.ReadLine());
+                switch (choice)
+                {
+                    case 1:
+                        fleet.alpha.energy = fleet.alpha.energy - fleet.missiles.energyUsage;
+                        if (fleet.alpha.energy >= fleet.missiles.energyUsage)
+                        {
+                            return MissleAttack();
+                        }
+                        Console.WriteLine("YOU DONT HAVE ENOUGH ENERGY TO USE THIS WEAPON! CHOOSE ANOTHER!");
+                        break;
+                    case 2:
+                        fleet.alpha.energy = fleet.alpha.energy - fleet.punch.energyUsage;
+                        if (fleet.alpha.energy >= fleet.punch.energyUsage)
+                        {
+                            return PunchAttack();
+                        }
+                        Console.WriteLine("YOU DONT HAVE ENOUGH ENERGY TO USE THIS WEAPON! CHOOSE ANOTHER!");
+                        break;
+                }
             }
+            while (fleet.alpha.energy >= 50);
             return 0;
         }
+       
         public int MissleAttack()
         {
             Console.WriteLine("SELECT A DINOSAUR TO ATTACK");
@@ -350,18 +380,33 @@ namespace Robots_vs_Dinosaurs
         public int GipsyWeaponChoice()
         {
             Console.WriteLine("SELECT A WEAPON");
-            Console.WriteLine("1)Weapon 1:" + fleet.plasma.weaponType + " | Attack Power:" + fleet.plasma.attackPower + "\n2)Weapon 2:" + fleet.sword.weaponType + " | Attack Power:" + fleet.sword.attackPower);
+            Console.WriteLine("1)Weapon 1:" + fleet.plasma.weaponType + " | Attack Power:" + fleet.plasma.attackPower + " | Energy usage:" + fleet.plasma.energyUsage + "\n2)Weapon 2:" + fleet.sword.weaponType + " | Attack Power:" + fleet.sword.attackPower + " | Energy usage:" + fleet.sword.energyUsage);
 
-            int choice = Convert.ToInt32(Console.ReadLine());
-            switch (choice)
+            int choice; 
+            do
             {
-                case 1:
-                    return PlasmaAttack();
-                    break;
-                case 2:
-                    return SwordAttack();
-                    break;
+                choice = Convert.ToInt32(Console.ReadLine());
+                switch (choice)
+                {
+                    case 1:
+                        fleet.gipsy.energy = fleet.gipsy.energy - fleet.plasma.energyUsage;
+                        if (fleet.gipsy.energy >= fleet.plasma.energyUsage)
+                        {
+                            return PlasmaAttack();
+                        }
+                        Console.WriteLine("YOU DONT HAVE ENOUGH ENERGY TO USE THIS WEAPON! CHOOSE ANOTHER!");
+                        break;
+                    case 2:
+                        fleet.gipsy.energy = fleet.gipsy.energy - fleet.sword.energyUsage;
+                        if (fleet.gipsy.energy >= fleet.sword.energyUsage)
+                        {
+                            return SwordAttack();
+                        }
+                        Console.WriteLine("YOU DONT HAVE ENOUGH ENERGY TO USE THIS WEAPON! CHOOSE ANOTHER!");
+                        break;
+                }
             }
+            while (fleet.gipsy.energy >= 50);
             return 0;
         }
         public int PlasmaAttack()
@@ -437,18 +482,33 @@ namespace Robots_vs_Dinosaurs
         public int TyphoonWeaponChoice()
         {
             Console.WriteLine("SELECT A WEAPON");
-            Console.WriteLine("1)Weapon 1:" + fleet.saw.weaponType + " | Attack Power:" + fleet.saw.attackPower + "\n2)Weapon 2:" + fleet.kick.weaponType + " | Attack Power:" + fleet.kick.attackPower);
+            Console.WriteLine("1)Weapon 1:" + fleet.saw.weaponType + " | Attack Power:" + fleet.saw.attackPower + " | Energy usage:" + fleet.saw.energyUsage + "\n2)Weapon 2:" + fleet.kick.weaponType + " | Attack Power:" + fleet.kick.attackPower + " | Energy usage:" + fleet.kick.energyUsage);
 
-            int choice = Convert.ToInt32(Console.ReadLine());
-            switch (choice)
+            int choice;
+            do
             {
-                case 1:
-                    return SawAttack();
-                    break;
-                case 2:
-                    return KickAttack();
-                    break;
+                choice = Convert.ToInt32(Console.ReadLine());
+                switch (choice)
+                {
+                    case 1:
+                        fleet.typhoon.energy = fleet.typhoon.energy - fleet.saw.energyUsage;
+                        if (fleet.typhoon.energy >= fleet.saw.energyUsage)
+                        {
+                            return SawAttack();
+                        }
+                        Console.WriteLine("YOU DONT HAVE ENOUGH ENERGY TO USE THIS WEAPON! CHOOSE ANOTHER!");
+                        break;
+                    case 2:
+                        fleet.typhoon.energy = fleet.typhoon.energy - fleet.kick.energyUsage;
+                        if (fleet.typhoon.energy >= fleet.kick.energyUsage)
+                        {
+                            return KickAttack();
+                        }
+                        Console.WriteLine("YOU DONT HAVE ENOUGH ENERGY TO USE THIS WEAPON! CHOOSE ANOTHER!");
+                        break;
+                }
             }
+            while (fleet.typhoon.energy >= 50);
             return 0;
         }
         public int SawAttack()

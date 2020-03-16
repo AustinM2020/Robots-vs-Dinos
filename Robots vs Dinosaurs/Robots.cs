@@ -7,19 +7,14 @@ namespace Robots_vs_Dinosaurs
     public class Robots
     {
         public string name;
-        public int energy;
-        public int powerLevel;
+        public int health;
         
-
-
-
-
-
-        public Robots(string name, int energy, int powerLevel)
+        public int energy;
+        public Robots(string name, int health, int energy)
         {
             this.name = name;
+            this.health = health;            
             this.energy = energy;
-            this.powerLevel = powerLevel;
 
             
         }
