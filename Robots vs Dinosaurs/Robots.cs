@@ -6,27 +6,25 @@ namespace Robots_vs_Dinosaurs
 {
     public class Robots
     {
-        string name;
-        int health;
-        int powerLevel;
-        Weapons;
+        public string name;
+        public int energy;
+        public int powerLevel;
+        
 
-        public Robots(string name, int health, int powerLevel,)
+
+
+
+
+        public Robots(string name, int energy, int powerLevel)
         {
             this.name = name;
-            this.health = health;
+            this.energy = energy;
             this.powerLevel = powerLevel;
 
+            
         }
-        Weapons plasma = new Weapons(125, "Plasma Canon", 125);
-        Weapons sword = new Weapons(150, "Sword", 150);
-
-        Weapons punch = new Weapons(200, "Rocket Punch", 250);
-        Weapons missiles = new Weapons(300, "Missile Barrage", 350);
-
-        Weapons kick = new Weapons(75, "Flying Fick", 50);
-        Weapons saw = new Weapons(100, "Buzzsaw", 75);
 
 
     }
+    
 }

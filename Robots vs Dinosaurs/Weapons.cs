@@ -6,9 +6,9 @@ namespace Robots_vs_Dinosaurs
 {
     public class Weapons
     {
-        int attackPower;
-        string weaponType;
-        int energyUsage;
+        public int attackPower;
+        public string weaponType;
+        public int energyUsage;
 
         public Weapons(int attackPower, string weaponType, int energyUsage)
         {
