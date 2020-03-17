@@ -41,7 +41,13 @@ namespace Robots_vs_Dinosaurs
         {
             while ((fleet.alpha.health + fleet.gipsy.health + fleet.typhoon.health) > 0  && (herd.spino.health + herd.ankyl.health + herd.quetzal.health) > 0)
             {
+                herd.spino.energy += 100;
+                herd.ankyl.energy += 100;
+                herd.quetzal.energy += 100;
                 MenuDino();
+                fleet.alpha.energy += 100;
+                fleet.gipsy.energy += 100;
+                fleet.typhoon.energy += 100;
                 MenuRobot();
             }
             if ((fleet.alpha.health > 0) && (fleet.gipsy.health > 0) && (fleet.typhoon.health > 0))
@@ -57,7 +63,13 @@ namespace Robots_vs_Dinosaurs
         {
             while (((fleet.alpha.health > 0) || (fleet.gipsy.health > 0) || (fleet.typhoon.health > 0)) && ((herd.spino.health > 0) || (herd.ankyl.health > 0) || (herd.quetzal.health > 0)))
             {
+                fleet.alpha.energy += 100;
+                fleet.gipsy.energy += 100;
+                fleet.typhoon.energy += 100;
                 MenuRobot();
+                herd.spino.energy += 100;
+                herd.ankyl.energy += 100;
+                herd.quetzal.energy += 100;
                 MenuDino();
             }
             if ((fleet.alpha.health > 0) && (fleet.gipsy.health > 0) && (fleet.typhoon.health > 0))
@@ -110,9 +122,9 @@ namespace Robots_vs_Dinosaurs
         public int MenuDino()
         {
             Console.WriteLine("SELECT A DINOSAUR TO USE!");
-            Console.WriteLine("1)" + herd.spino.type + " Health:" + herd.spino.health + " Attack Power:" + herd.spino.attackPower);
-            Console.WriteLine("2)" + herd.ankyl.type + " Health:" + herd.ankyl.health + " Attack Power:" + herd.ankyl.attackPower);
-            Console.WriteLine("3)" + herd.quetzal.type + " Health:" + herd.quetzal.health + " Attack Power:" + herd.quetzal.attackPower);
+            Console.WriteLine("1)" + herd.spino.type + " Health:" + herd.spino.health + " Attack Power:" + herd.spino.attackPower + " Energy:" + herd.spino.energy + " Energy Use:" + herd.spino.energyUsage);
+            Console.WriteLine("2)" + herd.ankyl.type + " Health:" + herd.ankyl.health + " Attack Power:" + herd.ankyl.attackPower + " Energy:" + herd.ankyl.energy + " Energy Use:" + herd.ankyl.energyUsage);
+            Console.WriteLine("3)" + herd.quetzal.type + " Health:" + herd.quetzal.health + " Attack Power:" + herd.quetzal.attackPower + " Energy:" + herd.quetzal.energy + " Energy Use:" + herd.quetzal.energyUsage);
             int choice;
             do
             {
@@ -158,6 +170,7 @@ namespace Robots_vs_Dinosaurs
             switch (choice)
             {
                 case 1:
+                    herd.spino.energyUsage = herd.spino.energy - herd.spino.energyUsage;
                     fleet.alpha.health = fleet.alpha.health - herd.spino.attackPower;
                     Console.WriteLine("CHERNO ALPHAS HEALTH IS NOW:" + fleet.alpha.health);
                     if (fleet.alpha.health <= 0)
@@ -167,6 +180,7 @@ namespace Robots_vs_Dinosaurs
                     return fleet.alpha.health;
                     break;
                 case 2:
+                    herd.spino.energyUsage = herd.spino.energy - herd.spino.energyUsage;
                     fleet.gipsy.health = fleet.gipsy.health - herd.spino.attackPower;
                     Console.WriteLine("GIPSY DANGERS HEALTH IS NOW:" + fleet.gipsy.health);
                     if (fleet.gipsy.health <= 0)
@@ -176,6 +190,7 @@ namespace Robots_vs_Dinosaurs
                     return fleet.gipsy.health;
                     break;
                 case 3:
+                    herd.spino.energyUsage = herd.spino.energy - herd.spino.energyUsage;
                     fleet.typhoon.health = fleet.typhoon.health - herd.spino.attackPower;
                     Console.WriteLine("CRIMSON TYPHOONS HEALTH IS NOW:" + fleet.typhoon.health);
                     if (fleet.typhoon.health <= 0)
@@ -199,6 +214,7 @@ namespace Robots_vs_Dinosaurs
             switch (choice)
             {
                 case 1:
+                    herd.ankyl.energyUsage = herd.ankyl.energy - herd.ankyl.energyUsage;
                     fleet.alpha.health = fleet.alpha.health - herd.ankyl.attackPower;
                     Console.WriteLine("CHERNO ALPHAS HEALTH IS NOW:" + fleet.alpha.health);
                     if (fleet.alpha.health <= 0)
@@ -208,6 +224,7 @@ namespace Robots_vs_Dinosaurs
                     return fleet.alpha.health;
                     break;
                 case 2:
+                    herd.ankyl.energyUsage = herd.ankyl.energy - herd.ankyl.energyUsage;
                     fleet.gipsy.health = fleet.gipsy.health - herd.ankyl.attackPower;
                     Console.WriteLine("GIPSY DANGERS HEALTH IS NOW:" + fleet.gipsy.health);
                     if (fleet.gipsy.health <= 0)
@@ -217,6 +234,7 @@ namespace Robots_vs_Dinosaurs
                     return fleet.gipsy.health;
                     break;
                 case 3:
+                    herd.ankyl.energyUsage = herd.ankyl.energy - herd.ankyl.energyUsage;
                     fleet.typhoon.health = fleet.typhoon.health - herd.ankyl.attackPower;
                     Console.WriteLine("CRIMSON TYPHOONS HEALTH IS NOW:" + fleet.typhoon.health);
                     if (fleet.typhoon.health <= 0)
@@ -241,6 +259,7 @@ namespace Robots_vs_Dinosaurs
             switch (choice)
             {
                 case 1:
+                    herd.quetzal.energyUsage = herd.quetzal.energy - herd.quetzal.energyUsage;
                     fleet.alpha.health = fleet.alpha.health - herd.quetzal.attackPower;
                     Console.WriteLine("CHERNO ALPHAS HEALTH IS NOW:" + fleet.alpha.health);
                     if (fleet.alpha.health <= 0)
@@ -250,6 +269,7 @@ namespace Robots_vs_Dinosaurs
                     return fleet.alpha.health;
                     break;
                 case 2:
+                    herd.quetzal.energyUsage = herd.quetzal.energy - herd.quetzal.energyUsage;
                     fleet.gipsy.health = fleet.gipsy.health - herd.quetzal.attackPower;
                     Console.WriteLine("GIPSY DANGERS HEALTH IS NOW:" + fleet.gipsy.health);
                     if (fleet.gipsy.health <= 0)
@@ -259,6 +279,7 @@ namespace Robots_vs_Dinosaurs
                     return fleet.gipsy.health;
                     break;
                 case 3:
+                    herd.quetzal.energyUsage = herd.quetzal.energy - herd.quetzal.energyUsage;
                     fleet.typhoon.health = fleet.typhoon.health - herd.quetzal.attackPower;
                     Console.WriteLine("CRIMSON TYPHOONS HEALTH IS NOW:" + fleet.typhoon.health);
                     if (fleet.typhoon.health <= 0)

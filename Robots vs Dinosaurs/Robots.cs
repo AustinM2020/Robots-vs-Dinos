@@ -7,8 +7,7 @@ namespace Robots_vs_Dinosaurs
     public class Robots
     {
         public string name;
-        public int health;
-        
+        public int health;        
         public int energy;
         public Robots(string name, int health, int energy)
         {

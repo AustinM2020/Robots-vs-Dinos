@@ -5,11 +5,14 @@
         public Dinosaur spino;
         public Dinosaur quetzal;
         public Dinosaur ankyl;
+        
         public Herd()
         {
-            spino = new Dinosaur("Spinosaurus", 300, 500, 50);
-            quetzal = new Dinosaur("Quetzalcoatlus", 200, 500, 50);
-            ankyl = new Dinosaur("Ankylosaurus", 500, 500, 50);
+            spino = new Dinosaur("Spinosaurus", 300, 200, 200, 200);
+            quetzal = new Dinosaur("Quetzalcoatlus", 100, 300, 100,100);
+            ankyl = new Dinosaur("Ankylosaurus", 500, 100, 300,300);
+
+            
         }
     }       
 }         
